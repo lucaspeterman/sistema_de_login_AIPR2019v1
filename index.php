@@ -135,19 +135,19 @@
     <script>
         /* jQuery */
         $(function() {
-            
+
 
             //preparação dos dados para envio para o back-end
             //Envio dos dados do formulário de login
             $('#btnEntrar').click(function(e) {
                 let formLogin = document.querySelector("#formLogin")
-                if(formLogin.checkValidity()){
-                    e.preventDefault();//Não recarregar a pagina
+                if (formLogin.checkValidity()) {
+                    e.preventDefault(); //Não recarregar a pagina
                     $.ajax({
-                        url:'recebe.php',
-                        method:'post',
-                        data:$('#formLogin').serialize()+'&action=login',
-                        success:function(resposta){
+                        url: 'recebe.php',
+                        method: 'post',
+                        data: $('#formLogin').serialize() + '&action=login',
+                        success: function(resposta) {
                             $('#alerta').show();
                             $('#resultado').html(resposta);
                         }
@@ -156,10 +156,38 @@
             });
 
             //Formulário de cadastro dwe usuário
-            $('#btnRegistrar').click(function(e) {});
+            $('#btnRegistrar').click(function(e) {
+                let formCadastro = document.querySelector("#formCadastro")
+                if (formCadastro.checkValidity()) {
+                    e.preventDefault(); //Não recarregar a pagina
+                    $.ajax({
+                        url: 'recebe.php',
+                        method: 'post',
+                        data: $('#formCadastro').serialize() + '&action=cadastrar',
+                        success: function(resposta) {
+                            $('#alerta').show();
+                            $('#resultado').html(resposta);
+                        }
+                    });
+                }
+            });
 
             //Formulário para mudar de senha
-            $('#btnEnviarEmail').click(function(e) {});
+            $('#btnEnviarEmail').click(function(e) {
+                let formSenha = document.querySelector("#formSenha")
+                if (formSenha.checkValidity()) {
+                    e.preventDefault(); //Não recarregar a pagina
+                    $.ajax({
+                        url: 'recebe.php',
+                        method: 'post',
+                        data: $('#formSenha').serialize() + '&action=recuperar',
+                        success: function(resposta) {
+                            $('#alerta').show();
+                            $('#resultado').html(resposta);
+                        }
+                    });
+                }
+            });
 
             //Trocar da Tela de Login para Recuperar Senha
             $("#btnEsqueci").click(function() {

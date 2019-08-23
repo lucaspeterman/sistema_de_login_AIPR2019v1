@@ -8,7 +8,7 @@ $dbpass = "";
 $dbname = "sistemaDeLogin";
 
 //Conexão com o banco de dados
-$conecta = new mysqli($dbhost,$dbuser, $dbpass, $dbname);
+$conecta = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
 if ($conecta-> connect_error){
     die("Não foi possível conectar ao banco de dados: " . $conecta->connect_error);
 }else{

@@ -1,4 +1,6 @@
 <?php
+//Inicializando a seção
+session_start();
 //É necessário fazer a conexão com o Banco de Dados
 require_once "configDB.php";
 function verificar_entrada($entrada)
@@ -8,7 +10,28 @@ function verificar_entrada($entrada)
     $saida = htmlspecialchars($saida);
     return $saida;
 }
-if (
+if(isset($_POST['action']) && $_POST['action'] == 'cadastro'){
+    $nomeUsuario = verificar_entrada($_POST['nomeUsuario']);
+    $senhaUsuario = verificar_entrada($_POST['senhaUsuario']);
+    $senha = sha1($senhaUsuario);
+    //para teste
+    //echo "<br>usuario: $nomeUsuario <br> senha: $senha";
+    $sql = $conecta->prepare("SELECT * FROM usuario WHERE nomeUsuario = ? AND senha = ?");
+    $sql->bind_param("ss", $nomeUsuario, $senha);
+    $sql->execute();
+    
+    $busca = $sql->fetch();
+    if($busca != null){
+        //Colocando o nome do Usuário na sessão
+        $_SESSION['nomeUsuário'] = $nomeUsuario;
+        echo "ok";
+    }else{
+        echo "usuário e senha não comferem!";
+    }
+}
+//Vericação e login do usuario
+
+elseif (
     isset($_POST['action']) &&
     $_POST['action'] == 'cadastro'
 ) {

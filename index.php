@@ -1,9 +1,9 @@
 <?php
-    
-    session_start();
-    if(isset($_SESSION['nomeUsuario']))
-        //Bloqueando usuários logados    
-        header("location: profile.php");
+
+session_start();
+if (isset($_SESSION['nomeUsuario']))
+    //Bloqueando usuários logados    
+    header("location: profile.php");
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
     <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
-    <title>Sistema de Login Sistemas TNX</title>
+    <title>Sistema de Login Sistemas LPM</title>
     <style>
         #caixaCadastro,
         #caixaRecuperarSenha,
@@ -105,6 +105,10 @@
                         <input type="password" name="senhaConfirma" id="senhaConfirma" class="form-control" placeholder="Confirme a sua senha" required minlength="6">
                     </div>
 
+                    <div class="form-group">
+                        <input type="text" name="imgurl" id="Url da imagem para avatar" class="form-control" placeholder="Url da imagem para avatar" required>
+                    </div>
+
                     <div class="form-group mt-5">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" name="concordar" id="concordar" class="custom-control-input">
@@ -187,7 +191,7 @@
                         success: function(resposta) {
                             $('#alerta').show();
                             $('#resultado').html(resposta);
-                            if(resposta === "ok"){
+                            if (resposta === "ok") {
                                 //Redirecinamento
                                 window.location = "profile.php";
                             }
@@ -216,13 +220,13 @@
             //Formulário para mudar de senha
             $('#btnEnviarEmail').click(function(e) {
                 let formSenha = document.querySelector('#formSenha');
-                if(formSenha.checkValidity()){
-                    e.preventDefault();//Não recarregar a página
+                if (formSenha.checkValidity()) {
+                    e.preventDefault(); //Não recarregar a página
                     $.ajax({
                         url: 'recebe.php',
                         method: 'post',
-                        data: $('#formSenha').serialize()+'&action=senha',
-                        success: function(resposta){
+                        data: $('#formSenha').serialize() + '&action=senha',
+                        success: function(resposta) {
                             $('#alerta').show();
                             $('#resultado').html(resposta);
                         }

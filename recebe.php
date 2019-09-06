@@ -13,8 +13,10 @@ function verificar_entrada($entrada)
     return $saida;
 }
 
-if(isset($_POST['action']) &&
-    $_POST['action'] == 'login'){
+if (
+    isset($_POST['action']) &&
+    $_POST['action'] == 'login'
+) {
     //Verificação e Login do usuário
     $nomeUsuario = verificar_entrada($_POST['nomeUsuario']);
     $senhaUsuario = verificar_entrada($_POST['senhaUsuario']);
@@ -28,16 +30,17 @@ if(isset($_POST['action']) &&
 
     $busca = $sql->fetch();
 
-    if($busca != null){ 
+    if ($busca != null) {
         //Colocando o nome do usuário na Sessão
         $_SESSION['nomeUsuario'] = $nomeUsuario;
         echo "ok";
-    }else{
+    } else {
         echo "usuário e senha não conferem!";
     }
-
-}else if (isset($_POST['action']) &&
-    $_POST['action'] == 'cadastro') {
+} else if (
+    isset($_POST['action']) &&
+    $_POST['action'] == 'cadastro'
+) {
     //Cadastro de um novo usuário
     //Pegar os campos do formulário
     $nomeCompleto = verificar_entrada($_POST['nomeCompleto']);
@@ -45,10 +48,11 @@ if(isset($_POST['action']) &&
     $emailUsuario = verificar_entrada($_POST['emailUsuário']);
     $senhaUsuario = verificar_entrada($_POST['senhaUsuário']);
     $senhaConfirma = verificar_entrada($_POST['senhaConfirma']);
+    $urlimg = verificar_entrada($_POST['imgurl']);
     $concordar = $_POST['concordar'];
     $dataCriacao = date("Y-m-d H:i:s");
 
-    
+
     //Hash de senha / Codificação de senha em 40 caracteres
     $senha = sha1($senhaUsuario);
     $senhaC = sha1($senhaConfirma);
@@ -62,23 +66,21 @@ if(isset($_POST['action']) &&
         $sql = $conecta->prepare("SELECT nomeUsuario, email 
         FROM usuario WHERE nomeUsuario = ? OR email = ?");
         //Substitui cada ? por uma string abaixo
-        $sql->bind_param("ss",$nomeUsuario, $emailUsuario);
+        $sql->bind_param("ss", $nomeUsuario, $emailUsuario);
         $sql->execute();
         $resultado = $sql->get_result();
         $linha = $resultado->fetch_array(MYSQLI_ASSOC);
-        if($linha['nomeUsuario'] == $nomeUsuario){
+        if ($linha['nomeUsuario'] == $nomeUsuario) {
             echo "<p>Nome de usuário indisponível, tente outro</p>";
-        }elseif ($linha['email'] == $emailUsuario) {
+        } elseif ($linha['email'] == $emailUsuario) {
             echo "<p>E-mail já em uso, tente outro</p>";
-        }else{ //Cadastro de usuário
-            $sql = $conecta->prepare("INSERT into usuario 
-            (nome, nomeUsuario, email, senha, dataCriacao) 
-            values(?, ?, ?, ?, ?)");
-            $sql->bind_param("sssss",$nomeCompleto, $nomeUsuario,
-        $emailUsuario, $senha, $dataCriacao);
-            if($sql->execute()){
+        } else { 
+            //Cadastro de usuário
+            $sql = $conecta->prepare("INSERT into usuario (nome, nomeUsuario, email, senha, urlimg, dataCriacao) values(?, ?, ?, ?, ?, ? )");
+            $sql->bind_param("ssssss", $nomeCompleto, $nomeUsuario, $emailUsuario, $senha, $urlimg, $dataCriacao);
+            if ($sql->execute()) {
                 echo "<p>Registrado com sucesso</p>";
-            }else{
+            } else {
                 echo "<p>Algo deu errado. Tente outra vez.</p>";
             }
         }

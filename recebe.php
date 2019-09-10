@@ -34,9 +34,22 @@ if (
         //Colocando o nome do usuário na Sessão
         $_SESSION['nomeUsuario'] = $nomeUsuario;
         echo "ok";
+
+        if(!empty($_POST['lembrar'])){
+            //Se não estiver vazio 
+            //armazenar Login e senha no cookie
+            setcookie("nomeUsuario", $nomeUsuario, time()+(30*24*60*60));
+            setcookie("senahUsuario", $senhaUsuario, time()+(30*24*60*60));//30 dias em segundos
+        }else{
+            //se estiver vazio
+            setcookie("nomeUsuario","");
+            setcookie("senhaUsuario","");
+        }
+
     } else {
         echo "usuário e senha não conferem!";
     }
+
 } else if (
     isset($_POST['action']) &&
     $_POST['action'] == 'cadastro'

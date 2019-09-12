@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Set-2019 às 16:46
+-- Tempo de geração: 12-Set-2019 às 16:37
 -- Versão do servidor: 10.3.16-MariaDB
 -- versão do PHP: 7.3.7
 
@@ -38,6 +38,8 @@ CREATE TABLE `usuario` (
   `email` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `senha` char(40) COLLATE utf8mb4_bin NOT NULL,
   `urlimg` char(200) COLLATE utf8mb4_bin NOT NULL,
+  `token` char(10) COLLATE utf8mb4_bin NOT NULL,
+  `tempo_de_vida` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `dataCriacao` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -45,8 +47,8 @@ CREATE TABLE `usuario` (
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nome`, `nomeUsuario`, `email`, `senha`, `urlimg`, `dataCriacao`) VALUES
-(1, 'gvrrcwt4', 'maconha', 'lucaspetermann78@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'https://image.freepik.com/free-vector/hand-drawn-dragon_53876-88179.jpg', '2019-09-06 15:48:10');
+INSERT INTO `usuario` (`idUsuario`, `nome`, `nomeUsuario`, `email`, `senha`, `urlimg`, `token`, `tempo_de_vida`, `dataCriacao`) VALUES
+(1, 'gvrrcwt4', 'maconha', 'lucaspetermann78@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'https://image.freepik.com/free-vector/hand-drawn-dragon_53876-88179.jpg', '', '2019-09-12 19:30:19', '2019-09-06 15:48:10');
 
 --
 -- Índices para tabelas despejadas

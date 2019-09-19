@@ -25,9 +25,17 @@ if (isset($_POST['action']) && $_POST['action'] == 'senha') {
         //Só para testar / debug
         //echo '<p class="text-success">E-mail encontrado</p>';
         $frase = "BatAtinh4Quando!@#$%NAscexexeEparr4maPeloChao&*";
-        $frase_secreta = str_shuffle($frase);
-        $token = substr($frase_secreta, 0, 10);
-        echo "<p>$token</p>";
+        $frase_secreta = str_shuffle($frase);//embaralha a frase
+        $token = substr($frase_secreta, 0, 10);//10 primeiros caracteres
+        //echo "<p>$token</p>";
+        $sql = $conecta->prepare("UPDATE usuario SET token = ?, tempo_de_vida = DATE_ADD(NOW(),INTERVAL 1 MINUTE) WHERE email = ?");
+        $sql->bind_param("ss",$token, $emailSenha);
+        $sql->execute();
+        //criação do linck para para gerar nova senha
+        $link = "<a href=\"gera_senha.php?token=$token\">
+        Clique aqui para gerar uma nova senha</a>";
+        //este linck deve ser enviado por email
+        echo $link;
     } else {
         echo '<p class="text-danger">E-mail não encontrado</p>';
     }

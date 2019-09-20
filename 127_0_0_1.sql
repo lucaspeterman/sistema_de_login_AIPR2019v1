@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Set-2019 às 16:37
+-- Tempo de geração: 12-Set-2019 às 16:36
 -- Versão do servidor: 10.3.16-MariaDB
 -- versão do PHP: 7.3.7
 
@@ -37,18 +37,20 @@ CREATE TABLE `usuario` (
   `nomeUsuario` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `senha` char(40) COLLATE utf8mb4_bin NOT NULL,
-  `urlimg` char(200) COLLATE utf8mb4_bin NOT NULL,
+  `dataCriacao` datetime NOT NULL,
+  `avatar_url` varchar(220) COLLATE utf8mb4_bin NOT NULL,
   `token` char(10) COLLATE utf8mb4_bin NOT NULL,
-  `tempo_de_vida` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `dataCriacao` datetime NOT NULL
+  `tempo_de_vida` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nome`, `nomeUsuario`, `email`, `senha`, `urlimg`, `token`, `tempo_de_vida`, `dataCriacao`) VALUES
-(1, 'gvrrcwt4', 'maconha', 'lucaspetermann78@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'https://image.freepik.com/free-vector/hand-drawn-dragon_53876-88179.jpg', '', '2019-09-12 19:30:19', '2019-09-06 15:48:10');
+INSERT INTO `usuario` (`idUsuario`, `nome`, `nomeUsuario`, `email`, `senha`, `dataCriacao`, `avatar_url`, `token`, `tempo_de_vida`) VALUES
+(1, 'Dinossauro Rexnux', 'dinonux', 'dinonux@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '2019-09-06 16:07:23', 'https://tarcnux.files.wordpress.com/2011/12/tarcnux_dez_2011_com_a_cabec3a7a_nas_nuvens.jpg', '', '2019-09-12 19:32:30'),
+(2, 'Topo Gigio', 'topogigio', 'gigio@bol.com.br', '7c4a8d09ca3762af61e59520943dc26494f8941b', '2019-09-06 16:23:38', 'https://3.bp.blogspot.com/_d-lesN9Fpho/TFIazIlq5VI/AAAAAAAAABs/3YxA0Zns9Wc/w1200-h630-p-k-no-nu/topo_gigio_08.jpg', '', '2019-09-12 19:32:30'),
+(3, 'Anita Garibaldi', 'anita', 'garibaldi@bol.com.br', '7c4a8d09ca3762af61e59520943dc26494f8941b', '2019-09-12 14:37:06', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Anita_Garibaldi_-_1839.jpg/200px-Anita_Garibaldi_-_1839.jpg', '', '2019-09-12 19:32:30');
 
 --
 -- Índices para tabelas despejadas
@@ -69,7 +71,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

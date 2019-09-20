@@ -14,22 +14,23 @@ require_once 'session.php';
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Slider</title>
+    <title>Álbum de Fotos</title>
 </head>
 
-<body class="bg-dark">
+<body>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Furyess systems</a>
+        <a class="navbar-brand" href="#">TNX Systems</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Home</a>
-                </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Slider <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="profile.php">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link 1</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link 2</a>
@@ -39,55 +40,57 @@ require_once 'session.php';
                         <?= $usuario ?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Configurações</a>
+                        <a class="dropdown-item" href="#">Fotos</a>
+                        <a class="dropdown-item" href="#">Config.</a>
                         <a class="dropdown-item" href="sair.php">Sair</a>
-                        <a class="dropdown-item" href="#">Link 3</a>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div class="bd-example" style="width:800px; height:800px; display:block; margin:auto; margin-top:50px;">
-        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner border border-light">
-                <div class="carousel-item active">
-                    <img src="img/3.jpg" class="d-block w-100" alt="Internet">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Placa Mãe</h5>
-                        <p>Componente de um computador.</p>
+    <main class="container">
+        <div class="bd-example">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images/cachorro-1300x780.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>First slide label</h5>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/caldo-de-cana-1300x780.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/heavy-metal-1300x780.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Third slide label</h5>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="img/1.jpg" class="d-block w-100" alt="Código de Programação">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Programação</h5>
-                        <p>Codigos de Programação.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="img/2.jpg" class="d-block w-100" alt="Computador Velho">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Computador</h5>
-                        <p>Um computador antigo.</p>
-                    </div>
-                </div>
+                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Próximo</span>
-            </a>
         </div>
-    </div>
+    </main>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

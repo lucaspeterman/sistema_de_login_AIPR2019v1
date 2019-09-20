@@ -1,39 +1,40 @@
 <?php
-require_once 'configDB.php';
+require_once 'configDB.php';//Conexão com o Banco de Dados
 if(isset($_GET['token']) && strlen($_GET['token']) == 10){
-        $token = $_GET['token'];
-        $sql = $conecta->prepare("SELECT * FROM usuario WHERE token = ? AND tempo_de_vida > now()");
-        $sql->bind_param("s", $token);
-        $sql->execute();
-        $resultado = $sql->get_result();
-        if($resultado->num_rows >0){
-            //echo "Nova senha:". @$_POST[senha];
-            //Salvar a nova senha no banco de dados
-            if(isset($_POST['senha'])){
-                $nova_senha = $_POST['senha'];
-                $confirma_senha = $_POST['csenha'];
-                if($senha == $confirma_senha){
-                    $sql = $conecta->prepare("UPDATE usuario SET senha = ? WHERE token = ?");
-                    $sql->bind_param("ss", $nova_senha,$token);
-                    $sql->execute();
-                    $msg = "Senha altera com sucesso";
-                }else{
-                    $msg = "As senhas não são iguais";
-                }
+    $token = $_GET['token'];
+    $sql = $conecta->prepare("SELECT * from usuario WHERE 
+    token = ? AND tempo_de_vida > now()");
+    $sql->bind_param("s", $token);
+    $sql->execute();
+    $resultado = $sql->get_result();
+    if($resultado->num_rows > 0){
+        //echo "Nova senha:". @$_POST[senha];
+        //Salvar a nova senha no banco de dados
+        if(isset($_POST['senha'])){
+            $nova_senha = sha1($_POST['senha']);
+            $confirma_senha = sha1($_POST['csenha']);
+            if($nova_senha == $confirma_senha){
+                $sql = $conecta->prepare("UPDATE usuario 
+                SET senha = ?, token ='' WHERE token = ?");
+                $sql->bind_param("ss",$nova_senha,$token);
+                $sql->execute();
+                $msg = "Senha alterada com sucesso";
+            }else{
+                $msg = "As senhas não são iguais.";
             }
-        }else{//Token sem vida
-            header('location: index.php');
-            exit();
         }
-}else{
-    header('location:index.php');//kick da pagina
+    }else { //Token sem vida        
+        header('location: index.php');
+        exit();
+    }
+}else{//Sem token ou token diferente de 10 caracteres
+    header('location:index.php');//Kick da página
     exit();
 }
-
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <!-- Required meta tags -->
@@ -47,30 +48,52 @@ if(isset($_GET['token']) && strlen($_GET['token']) == 10){
 </head>
 
 <body>
-
     <main class="container">
         <section class="row justify-content-center">
             <div class="col-lg-5 mt-5">
-                <h3 class="text-center bg-dark text-light p-2 rounded">Crie uma nova senha</h3>
-                <h4 class="text-center"><?= @$msg ?></h4>
+                <h3 class="text-center bg-dark text-light p-2 rounded">
+                    Crie uma nova senha
+                </h3>
+                <h4 class="text-center">
+                    <?= @$msg ?>
+                </h4>
                 <form action="" method="post">
                     <div class="form-group">
-                        <label for="senha">Nova Senha</label>
-                        <input type="password" name="senha" id="senha" class="form-control" placeholder="Nova Senha" required>
+                        <label for="senha">
+                            Nova Senha
+                        </label>
+                        <input type="password" 
+                        name="senha" id="senha" 
+                        class="form-control" 
+                        placeholder="Nova Senha" 
+                        required>
                     </div>
                     <div class="form-group">
-                        <label for="csenha">Confirme a Senha</label>
-                        <input type="password" name="senha" id="csenha" class="form-control" placeholder="Confirme a Senha" required>
+                        <label for="csenha">
+                            Confirme a Senha
+                        </label>
+                        <input type="password" 
+                        name="csenha" id="csenha" 
+                        class="form-control" 
+                        placeholder="Nova Senha" 
+                        required>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Gerar nova senha" class="btn btn-primary btn-block">
+                        <input type="submit" 
+                        value=":: Criar nova senha ::"
+                        name="criar" 
+                        class="btn btn-block"
+                        style="background: purple; 
+                                color: white; 
+                                font-weight: bolder;
+                                padding: 10px;
+                                font-size: 22px;
+                                box-shadow: 3px 3px 3px gray;">
                     </div>
                 </form>
             </div>
         </section>
     </main>
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
